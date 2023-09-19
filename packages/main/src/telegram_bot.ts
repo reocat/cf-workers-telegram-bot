@@ -188,7 +188,7 @@ export default class TelegramBot extends TelegramApi {
 			);
 
 	// bot command: /cat
-	dog = async (update: TelegramUpdate): Promise<Response> =>
+	cat = async (update: TelegramUpdate): Promise<Response> =>
 		fetch("https://shibe.online/api/cats")
 			.then((response) => response.json())
 			.then((json) => json as [string])

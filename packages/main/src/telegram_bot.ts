@@ -188,18 +188,18 @@ export default class TelegramBot extends TelegramApi {
 			);
 
 	// bot command: /cat
-	cat = async (update: TelegramUpdate): Promise<Response> =>
-		fetch("https://meow.senither.com/v1/random")
+	dog = async (update: TelegramUpdate): Promise<Response> =>
+		fetch("https://shibe.online/api/cats")
 			.then((response) => response.json())
-			.then((json) => json as { data: { url: string } })
-			.then((json) =>
+			.then((json) => json as [string])
+			.then((shibe_cats_response) =>
 				update.inline_query
 					? this.answerInlineQuery(
 							update.inline_query.id,
-							[new TelegramInlineQueryResultPhoto(json.data.url)],
+							[new TelegramInlineQueryResultPhoto(shibe_cats_response[0])],
 							0
 					  )
-					: this.sendPhoto(update.message?.chat.id ?? 0, json.data.url)
+					: this.sendPhoto(update.message?.chat.id ?? 0, shibe_cats_response[0])
 			);
 
 	// bot command: /bored
